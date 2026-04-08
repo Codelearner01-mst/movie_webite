@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import MovieCard from "../components/MovieCard";
 import Search from "../components/Search";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [latestMovies, setLatestMovies] = useState([]);
@@ -11,12 +12,12 @@ const Home = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const page = 1;
+      const firstPage = 1;
 
       try {
-        const LATESTMOVIES = await getMovies("now_playing", page);
+        const LATESTMOVIES = await getMovies("now_playing", firstPage);
         setLatestMovies(LATESTMOVIES.results);
-        const UPCOMINGMOVIES = await getMovies("upcoming", 2);
+        const UPCOMINGMOVIES = await getMovies("upcoming", firstPage);
         setUpcomingMovies(UPCOMINGMOVIES.results);
       } catch (error) {
         console.error("Error fetching movies:", error);
@@ -43,7 +44,9 @@ const Home = () => {
             ))}
           </div>
           <div className="load-more-container">
-            <button className="load-more-btn">Load More</button>
+            <Link to="/latest" className="load-more-btn">
+              Explore more latest
+            </Link>
           </div>
         </div>
 
@@ -55,7 +58,9 @@ const Home = () => {
             ))}
           </div>
           <div className="load-more-container">
-            <button className="load-more-btn">Load More</button>
+            <Link to="/upcoming" className="load-more-btn">
+              Explore more upcoming
+            </Link>
           </div>
         </div>
       </div>
