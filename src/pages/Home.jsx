@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getMovies from "../service/movies-service";
+import useFetch from "../service/movies_service";
 import Hero from "../components/Hero";
 import MovieCard from "../components/MovieCard";
 import Search from "../components/Search";
@@ -7,24 +7,16 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [latestMovies, setLatestMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      const firstPage = 1;
-
-      try {
-        const LATESTMOVIES = await getMovies("now_playing", firstPage);
-        setLatestMovies(LATESTMOVIES.results);
-        const UPCOMINGMOVIES = await getMovies("upcoming", firstPage);
-        setUpcomingMovies(UPCOMINGMOVIES.results);
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-      }
-    };
-    fetchMovies();
-  }, []);
+  const {
+    movies: latestMovies,
+    isLoading: isLatestLoading,
+    error: latestError,
+  } = useFetch("now_playing", 1);
+  const {
+    movies: upcomingMovies,
+    isLoading: isUpcomingLoading,
+    error: upcomingError,
+  } = useFetch("upcoming", 1);
 
   return (
     <div className="home-page">
@@ -39,6 +31,8 @@ const Home = () => {
         <div className="movie-section mb-4">
           <h2 className="section-title">Expected Next: Latest Movies</h2>
           <div className="movies-grid">
+            {latestError && <p className="text-danger">Error: {latestError}</p>}
+            {isLatestLoading && <p>Loading latest movies...</p>}
             {latestMovies.slice(0, 8).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
@@ -53,6 +47,10 @@ const Home = () => {
         <div className="movie-section mt-4 pt-4">
           <h2 className="section-title">Upcoming Movies</h2>
           <div className="movies-grid">
+            {upcomingError && (
+              <p className="text-danger">Error: {upcomingError}</p>
+            )}
+            {isUpcomingLoading && <p>Loading upcoming movies...</p>}
             {upcomingMovies.slice(0, 8).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}

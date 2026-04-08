@@ -1,29 +1,25 @@
 import { useState, useEffect } from "react";
 import Hero from "../components/Hero";
-import getMovies from "../service/movies-service";
+import useFetch from "../service/movies_service";
 import MovieCard from "../components/MovieCard";
 
 const Latest = () => {
-  const [latestMovies, setLatestMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const {
+    movies: latestMovies,
+    isLoading: isLatestLoading,
+    error: latestError,
+  } = useFetch("now_playing", currentPage);
+  const [loadAllMovies, setLoadAllMovies] = useState([]);
 
   useEffect(() => {
-    const fetchLatestMovies = async () => {
-      try {
-        const data = await getMovies("now_playing", currentPage);
-        setLatestMovies(data.results);
-      } catch (error) {
-        console.error("Error fetching latest movies:", error);
-      }
-    };
-
-    fetchLatestMovies();
-  }, [currentPage]);
+    setLoadAllMovies(latestMovies);
+  }, [latestMovies]);
 
   const loadMoreMovies = () => {
     const nextPage = currentPage + 1;
     setCurrentPage(nextPage);
-    setLatestMovies((prevMovies) => [...prevMovies, ...latestMovies]);
+    setLoadAllMovies((prevMovies) => [...prevMovies, ...latestMovies]);
   };
 
   return (
@@ -49,7 +45,9 @@ const Latest = () => {
           explosive blockbusters, find your next favorite movie here.
         </p>
         <div className="movies-grid">
-          {latestMovies.map((movie) => (
+          {latestError && <p className="text-danger">Error: {latestError}</p>}
+          {isLatestLoading && <p>Loading latest movies...</p>}
+          {loadAllMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
