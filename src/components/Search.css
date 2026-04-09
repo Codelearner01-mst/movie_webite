@@ -1,7 +1,7 @@
 .search-container {
   background-color: var(--secondary-bg);
   padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 65px; /* Offset to sit cleanly underneath the sticky Navbar */
   z-index: 99;
@@ -21,7 +21,9 @@
   border-radius: 50px;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   font-family: inherit;
   background-color: var(--primary-bg);
   color: var(--text-main);
@@ -45,7 +47,9 @@
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .search-btn:hover {
@@ -62,7 +66,7 @@
     flex-direction: column;
     padding: 0 1rem;
   }
-  
+
   .search-btn {
     padding: 1rem;
   }

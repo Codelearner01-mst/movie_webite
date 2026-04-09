@@ -45,8 +45,8 @@ const Upcoming = () => {
           thrillers, and captivating dramas that will define the next era of
           filmmaking.
         </p>
+        {upcomingError && <ErrorCard message={upcomingError} />}
         <div className="movies-grid">
-          {upcomingError && <ErrorCard message={upcomingError} />}
           {isUpcomingLoading && <p>Loading upcoming movies...</p>}
           {loadAllMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
