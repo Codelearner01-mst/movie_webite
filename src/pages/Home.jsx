@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useFetch from "../service/movies_service";
 import Hero from "../components/Hero";
 import MovieCard from "../components/MovieCard";
+import { ErrorCard } from "../components/errorCard";
 import Search from "../components/Search";
 import "./Home.css";
 import { Link } from "react-router-dom";
@@ -30,8 +31,8 @@ const Home = () => {
       <div className="container py-4">
         <div className="movie-section mb-4">
           <h2 className="section-title">Expected Next: Latest Movies</h2>
+          {latestError && <ErrorCard message={latestError} />}
           <div className="movies-grid">
-            {latestError && <p className="text-danger">Error: {latestError}</p>}
             {isLatestLoading && <p>Loading latest movies...</p>}
             {latestMovies.slice(0, 8).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
@@ -46,10 +47,8 @@ const Home = () => {
 
         <div className="movie-section mt-4 pt-4">
           <h2 className="section-title">Upcoming Movies</h2>
+          {upcomingError && <ErrorCard message={upcomingError} />}
           <div className="movies-grid">
-            {upcomingError && (
-              <p className="text-danger">Error: {upcomingError}</p>
-            )}
             {isUpcomingLoading && <p>Loading upcoming movies...</p>}
             {upcomingMovies.slice(0, 8).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />

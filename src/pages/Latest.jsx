@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ErrorCard } from "../components/ErrorCard";
 import Hero from "../components/Hero";
 import useFetch from "../service/movies_service";
 import MovieCard from "../components/MovieCard";
@@ -44,8 +45,8 @@ const Latest = () => {
           dominating the box office. From critically acclaimed indie films to
           explosive blockbusters, find your next favorite movie here.
         </p>
+        {latestError && <ErrorCard message={latestError} />}
         <div className="movies-grid">
-          {latestError && <p className="text-danger">Error: {latestError}</p>}
           {isLatestLoading && <p>Loading latest movies...</p>}
           {loadAllMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />

@@ -1,5 +1,5 @@
-import React from "react";
-const { useState, useEffect } = React;
+import { useState, useEffect } from "react";
+import { ErrorCard } from "../components/ErrorCard";
 import Hero from "../components/Hero";
 import useFetch from "../service/movies_service";
 import MovieCard from "../components/MovieCard";
@@ -7,20 +7,20 @@ import MovieCard from "../components/MovieCard";
 const Upcoming = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const {
-    movies: latestMovies,
-    isLoading: isLatestLoading,
-    error: latestError,
+    movies: upcomingMovies,
+    isLoading: isUpcomingLoading,
+    error: upcomingError,
   } = useFetch("upcoming", currentPage);
   const [loadAllMovies, setLoadAllMovies] = useState([]);
 
   useEffect(() => {
-    setLoadAllMovies(latestMovies);
-  }, [latestMovies]);
+    setLoadAllMovies(upcomingMovies);
+  }, [upcomingMovies]);
 
   const loadMoreMovies = () => {
     const nextPage = currentPage + 1;
     setCurrentPage(nextPage);
-    setLoadAllMovies((prevMovies) => [...prevMovies, ...latestMovies]);
+    setLoadAllMovies((prevMovies) => [...prevMovies, ...upcomingMovies]);
   };
 
   return (
@@ -46,8 +46,8 @@ const Upcoming = () => {
           filmmaking.
         </p>
         <div className="movies-grid">
-          {latestError && <p className="text-danger">Error: {latestError}</p>}
-          {isLatestLoading && <p>Loading latest movies...</p>}
+          {upcomingError && <ErrorCard message={upcomingError} />}
+          {isUpcomingLoading && <p>Loading upcoming movies...</p>}
           {loadAllMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}

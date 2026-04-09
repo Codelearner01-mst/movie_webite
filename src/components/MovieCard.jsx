@@ -1,5 +1,5 @@
-import React from 'react';
-import './MovieCard.css';
+import React from "react";
+import "./MovieCard.css";
 
 const MovieCard = ({ movie }) => {
   // TMDB only returns the image path suffix, so we must prepend the base URL
@@ -10,7 +10,13 @@ const MovieCard = ({ movie }) => {
   return (
     <div className="movie-card">
       <div className="movie-card-image-wrap">
-        <img src={imageUrl} alt={movie.title} className="movie-card-image" />
+        <img
+          src={imageUrl}
+          alt={movie.title}
+          placeholder="Image not available"
+          className="movie-card-image"
+          style={{ backgroundColor: "gray" }}
+        />
         <div className="movie-card-overlay">
           <button className="watch-btn">View Details</button>
         </div>

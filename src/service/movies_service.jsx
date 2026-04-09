@@ -32,7 +32,7 @@ function useFetch(type, page) {
       } catch (error) {
         console.error("Error fetching movies:", error);
         setError(
-          "Failed to fetch movies. Please check your connection and try again later.",
+          "Failed to fetch movies. Please check your internet connection or try again later.",
         );
         setIsLoading(false);
       }
