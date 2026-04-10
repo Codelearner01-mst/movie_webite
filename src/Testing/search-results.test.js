@@ -3,6 +3,6 @@ test("Search results display correctly", () => {
   // Test implementation
 });
 test("Search results display correctly for only capital letters search", () => {
-  expect("IRON").toBe("iron man"); // Placeholder assertion, replace with actual test logic
+  expect("IRON").toBe("Iron Man"); // Placeholder assertion, replace with actual test logic
   // Test implementation
 });

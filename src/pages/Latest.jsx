@@ -6,11 +6,12 @@ import MovieCard from "../components/MovieCard";
 
 const Latest = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const LATESTAPIURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${currentPage}`;
   const {
     movies: latestMovies,
     isLoading: isLatestLoading,
     error: latestError,
-  } = useFetch("now_playing", currentPage);
+  } = useFetch(LATESTAPIURL);
   const [loadAllMovies, setLoadAllMovies] = useState([]);
 
   useEffect(() => {

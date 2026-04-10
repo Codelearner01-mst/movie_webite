@@ -6,11 +6,12 @@ import MovieCard from "../components/MovieCard";
 
 const Upcoming = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const UPCOMINGTAPIURL = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${currentPage}`;
   const {
     movies: upcomingMovies,
     isLoading: isUpcomingLoading,
     error: upcomingError,
-  } = useFetch("upcoming", currentPage);
+  } = useFetch(UPCOMINGTAPIURL);
   const [loadAllMovies, setLoadAllMovies] = useState([]);
 
   useEffect(() => {

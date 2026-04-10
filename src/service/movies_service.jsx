@@ -12,8 +12,7 @@ const options = {
   },
 };
 
-function useFetch(type, page) {
-  const APIURL = `https://api.themoviedb.org/3/movie/${type}?language=en-US&page=${page}`;
+function useFetch(url) {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
@@ -21,7 +20,7 @@ function useFetch(type, page) {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch(APIURL, options);
+        const response = await fetch(url, options);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -38,7 +37,7 @@ function useFetch(type, page) {
       }
     };
     fetchMovies();
-  }, [APIURL]);
+  }, [url]);
 
   return { movies, isLoading, error };
 }
