@@ -1,0 +1,108 @@
+.movie-card2-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.movie-card2-horizontal:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(229, 9, 20, 0.15);
+}
+
+.movie-card2-overview {
+  flex: 1;
+  text-align: left;
+  padding-right: 2rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.movie-card2-date {
+  flex: 0 0 150px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent-red);
+  padding: 0 1.5rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.movie-card2-right {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.movie-card2-image-wrap {
+  width: 120px;
+  height: 165px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card2-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-card2-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Make it responsive for smaller screens */
+@media (max-width: 768px) {
+  .movie-card2-horizontal {
+    padding: 0.75rem;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .movie-card2-overview {
+    font-size: 0.8rem;
+    padding-right: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .movie-card2-date {
+    flex: 0 0 60px;
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
+
+  .movie-card2-right {
+    flex: 0 0 90px;
+    padding-left: 0.5rem;
+  }
+
+  .movie-card2-image-wrap {
+    width: 70px;
+    height: 105px;
+    margin-bottom: 0.5rem;
+  }
+
+  .movie-card2-title {
+    font-size: 0.8rem;
+  }
+}

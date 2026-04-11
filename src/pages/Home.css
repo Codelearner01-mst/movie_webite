@@ -18,6 +18,13 @@
   border-bottom: 1px solid rgb(212, 208, 208);
 }
 
+.favourite-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-direction: column;
+}
+
 .movies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
