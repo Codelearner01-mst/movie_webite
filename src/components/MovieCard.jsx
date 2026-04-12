@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./MovieCard.css";
 import { saveToLocalStorage } from "../Utils/storage";
 import { getFromLocalStorage } from "../Utils/storage";
 import { isMovieInFavourites } from "../Utils/helper";
 
 const MovieCard = ({ movie }) => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFavourite, setIsFavourite] = useState(isMovieInFavourites(movie));
 
@@ -57,7 +59,7 @@ const MovieCard = ({ movie }) => {
           style={{ backgroundColor: "gray" }}
         />
         <div className="movie-card-overlay">
-          <button className="watch-btn">View Details</button>
+          <button className="watch-btn" onClick={() => navigate(`/movie/${movie.id}`)}>View Details</button>
         </div>
       </div>
       <div className="movie-card-content">

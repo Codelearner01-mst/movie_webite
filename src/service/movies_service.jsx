@@ -25,6 +25,7 @@ function useFetch(url) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data);
         setMovies(data.results);
         setIsLoading(false);
         return data;
@@ -40,6 +41,38 @@ function useFetch(url) {
   }, [url]);
 
   return { movies, isLoading, error };
+}
+
+export function useMovieDetails(movieId) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [movie, setMovie] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // If there is no ID, abort.
+    if (!movieId) return;
+
+    const fetchDetails = async () => {
+      setIsLoading(true);
+      try {
+        const url = `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=videos&language=en-US`;
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setMovie(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+        setError("Failed to fetch movie details. Please try again.");
+        setIsLoading(false);
+      }
+    };
+    fetchDetails();
+  }, [movieId]);
+
+  return { movie, isLoading, error };
 }
 
 export default useFetch;
