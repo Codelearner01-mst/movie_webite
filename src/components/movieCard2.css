@@ -1,3 +1,9 @@
+.movies-grid2 {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
 .movie-card2-horizontal {
   display: flex;
   justify-content: space-between;
@@ -5,7 +11,9 @@
   background-color: var(--secondary-bg);
   border-radius: 8px;
   padding: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   width: 100%;
 }
@@ -45,6 +53,12 @@
   padding-left: 2rem;
 }
 
+.movie-card2-right button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
 .movie-card2-image-wrap {
   width: 120px;
   height: 165px;
@@ -52,6 +66,11 @@
   overflow: hidden;
   margin-bottom: 0.75rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card2-image:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
 .movie-card2-image {

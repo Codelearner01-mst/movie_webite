@@ -1,6 +1,8 @@
 import "./movieCard2.css";
+import { useNavigate } from "react-router-dom";
 
 function MovieCard2({ movie }) {
+  const navigate = useNavigate();
   const imageUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : movie.image;
@@ -25,10 +27,20 @@ function MovieCard2({ movie }) {
       </div>
 
       <div className="movie-card2-right">
-        <div className="movie-card2-image-wrap">
-          <img src={imageUrl} alt={movie.title} className="movie-card2-image" />
-        </div>
-        <h3 className="movie-card2-title">{movie.title}</h3>
+        <button
+          onClick={() => {
+            navigate(`/movie/${movie.id}`);
+          }}
+        >
+          <div className="movie-card2-image-wrap">
+            <img
+              src={imageUrl}
+              alt={movie.title}
+              className="movie-card2-image"
+            />
+          </div>
+          <h3 className="movie-card2-title">{movie.title}</h3>
+        </button>
       </div>
     </div>
   );
