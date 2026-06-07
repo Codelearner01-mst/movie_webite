@@ -29,32 +29,29 @@ const Upcoming = () => {
       <Hero
         image="/secondary-hero.png"
         title="Upcoming Movies"
-        subtitle="Get ready for the next wave of cinematic masterpieces. Here is a sneak peek at what's hitting the theaters soon."
+        subtitle="Get ready for the next wave of cinematic masterpieces. A sneak peek at what's hitting theaters soon."
+        badge="Premiere Preview"
       />
-      <div className="container py-4 text-center">
-        <h2 className="section-title">The Future of Cinema</h2>
-        <p
-          style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            fontSize: "1.1rem",
-            color: "var(--text-muted)",
-          }}
-        >
-          We are constantly updating our database with the most anticipated
-          upcoming movies. Stay tuned for epic sci-fi adventures, heart-pounding
-          thrillers, and captivating dramas that will define the next era of
-          filmmaking.
-        </p>
+      <div className="container py-4">
+        <div className="section-header centered">
+          <span className="section-eyebrow">Anticipated</span>
+          <h2 className="section-title">The Future of Cinema</h2>
+          <p className="section-description">
+            Epic sci-fi adventures, heart-pounding thrillers, and captivating dramas
+            that will define the next era of filmmaking.
+          </p>
+        </div>
         {upcomingError && <ErrorCard message={upcomingError} />}
         <div className="movies-grid">
-          {isUpcomingLoading && <p>Loading upcoming movies...</p>}
+          {isUpcomingLoading && loadAllMovies.length === 0 && (
+            <p className="loading-text">Loading upcoming movies</p>
+          )}
           {loadAllMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
         <div className="load-more-container">
-          <button className="load-more-btn" onClick={loadMoreMovies}>
+          <button className="load-more-btn" type="button" onClick={loadMoreMovies}>
             Load More
           </button>
         </div>

@@ -17,22 +17,16 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/latest" element={<Latest />} />
-            <Route path="/favourite" element={<Favourite />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/favourite" element={<Favourite />} />
           </Routes>
         </main>
-        <footer
-          style={{
-            textAlign: "center",
-            padding: "2rem 0",
-            borderTop: "1px solid #ebebeb",
-            marginTop: "auto",
-            backgroundColor: "var(--secondary-bg)",
-          }}
-        >
-          <p style={{ color: "var(--text-muted)" }}>
-            &copy; 2026 Cinematix. All rights reserved.
+        <footer className="site-footer">
+          <p className="footer-brand">
+            CINEMA<span>TIX</span>
           </p>
+          <p className="footer-tagline">Where every frame tells a story</p>
+          <p className="footer-copy">&copy; 2026 Cinematix. All rights reserved.</p>
         </footer>
       </div>
     </Router>

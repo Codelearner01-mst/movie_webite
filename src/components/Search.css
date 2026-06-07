@@ -1,73 +1,69 @@
 .search-container {
-  background-color: var(--secondary-bg);
-  padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(to bottom, var(--bg-deep), var(--bg-void));
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
-  top: 65px; /* Offset to sit cleanly underneath the sticky Navbar */
-  z-index: 99;
+  top: var(--nav-height);
+  z-index: 150;
+  backdrop-filter: blur(12px);
 }
 
-.search-form {
-  display: flex;
-  max-width: 800px;
+.search-wrapper {
+  position: relative;
+  max-width: 640px;
   margin: 0 auto;
-  gap: 10px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+  transition: color 0.3s ease;
 }
 
 .search-input {
-  flex-grow: 1;
-  padding: 1rem 1.5rem;
-  border: 2px solid #ebebeb;
-  border-radius: 50px;
-  font-size: 1rem;
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
   outline: none;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.35s ease;
   font-family: inherit;
-  background-color: var(--primary-bg);
+  background: var(--bg-surface);
   color: var(--text-main);
-}
-
-.search-input:focus {
-  border-color: var(--accent-red);
-  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+  letter-spacing: 0.02em;
 }
 
 .search-input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-dim);
 }
 
-.search-btn {
-  padding: 0 2rem;
-  background-color: var(--accent-red);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
+.search-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow:
+    0 0 0 3px rgba(212, 168, 83, 0.12),
+    var(--shadow-gold);
 }
 
-.search-btn:hover {
-  background-color: var(--accent-red-hover);
-  transform: translateY(-2px);
+.search-wrapper:focus-within .search-icon {
+  color: var(--accent-gold);
 }
 
-.search-btn:active {
-  transform: translateY(0);
+.search-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-gold);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+  filter: blur(8px);
 }
 
-@media (max-width: 768px) {
-  .search-form {
-    flex-direction: column;
-    padding: 0 1rem;
-  }
-
-  .search-btn {
-    padding: 1rem;
-  }
+.search-wrapper:focus-within .search-glow {
+  opacity: 0.15;
 }

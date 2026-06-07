@@ -67,6 +67,7 @@ const MovieDetails = () => {
 
           {/* Right Column: Title, Overview, Trailer */}
           <div className="movie-details-right">
+            <span className="section-eyebrow">Movie Info</span>
             <h1 className="detail-title">{movie.title}</h1>
             {movie.tagline && <p className="detail-tagline">"{movie.tagline}"</p>}
 

@@ -8,19 +8,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--secondary-bg);
-  border-radius: 8px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
   padding: 1.5rem;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: var(--shadow-card);
   width: 100%;
 }
 
 .movie-card2-horizontal:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(229, 9, 20, 0.15);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
 }
 
 .movie-card2-overview {
@@ -29,20 +28,21 @@
   padding-right: 2rem;
   font-size: 0.95rem;
   color: var(--text-muted);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--border-subtle);
+  line-height: 1.6;
 }
 
 .movie-card2-date {
   flex: 0 0 150px;
   text-align: center;
   font-weight: 700;
-  color: var(--accent-red);
+  color: var(--accent-gold-bright);
   padding: 0 1.5rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .movie-card2-right {
@@ -55,39 +55,40 @@
 
 .movie-card2-right button {
   border: none;
-  background-color: white;
+  background: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .movie-card2-image-wrap {
   width: 120px;
   height: 165px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 0.75rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.movie-card2-image:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
 }
 
 .movie-card2-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.movie-card2-image-wrap:hover .movie-card2-image {
+  transform: scale(1.05);
 }
 
 .movie-card2-title {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text-main);
   text-align: center;
   line-height: 1.2;
 }
 
-/* Make it responsive for smaller screens */
 @media (max-width: 768px) {
   .movie-card2-horizontal {
     padding: 0.75rem;

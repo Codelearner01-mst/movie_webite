@@ -29,32 +29,29 @@ const Latest = () => {
       <Hero
         image="/secondary-hero.png"
         title="Latest Releases"
-        subtitle="Stay up to date with the newest additions to the big screen. Don't miss out on the movies everyone is talking about."
+        subtitle="Stay up to date with the newest additions to the big screen. Don't miss the films everyone is talking about."
+        badge="Now Showing"
       />
-      <div className="container py-4 text-center">
-        <h2 className="section-title">Now Showing</h2>
-        <p
-          style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            fontSize: "1.1rem",
-            color: "var(--text-muted)",
-            marginBottom: "2rem",
-          }}
-        >
-          Explore our handpicked selection of the latest movies currently
-          dominating the box office. From critically acclaimed indie films to
-          explosive blockbusters, find your next favorite movie here.
-        </p>
+      <div className="container py-4">
+        <div className="section-header centered">
+          <span className="section-eyebrow">Box Office</span>
+          <h2 className="section-title">Now Showing</h2>
+          <p className="section-description">
+            From critically acclaimed indie films to explosive blockbusters — find
+            your next favorite movie here.
+          </p>
+        </div>
         {latestError && <ErrorCard message={latestError} />}
         <div className="movies-grid">
-          {isLatestLoading && <p>Loading latest movies...</p>}
+          {isLatestLoading && loadAllMovies.length === 0 && (
+            <p className="loading-text">Loading latest movies</p>
+          )}
           {loadAllMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
         <div className="load-more-container">
-          <button className="load-more-btn" onClick={loadMoreMovies}>
+          <button className="load-more-btn" type="button" onClick={loadMoreMovies}>
             Load More
           </button>
         </div>

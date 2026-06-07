@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
@@ -16,8 +16,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Upcoming Movies", path: "/upcoming" },
-    { name: "Latest Movies", path: "/latest" },
+    { name: "Upcoming", path: "/upcoming" },
+    { name: "Latest", path: "/latest" },
     { name: "My Favourite", path: "/favourite" },
   ];
 

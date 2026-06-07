@@ -25,12 +25,11 @@ function useFetch(url) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setMovies(data.results);
         setIsLoading(false);
         return data;
-      } catch (error) {
-        console.error("Error fetching movies:", error);
+      } catch (err) {
+        console.error("Error fetching movies:", err);
         setError(
           "Failed to fetch movies. Please check your internet connection or try again later.",
         );
@@ -49,7 +48,6 @@ export function useMovieDetails(movieId) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // If there is no ID, abort.
     if (!movieId) return;
 
     const fetchDetails = async () => {
@@ -63,8 +61,8 @@ export function useMovieDetails(movieId) {
         const data = await response.json();
         setMovie(data);
         setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching movie details:", error);
+      } catch (err) {
+        console.error("Error fetching movie details:", err);
         setError("Failed to fetch movie details. Please try again.");
         setIsLoading(false);
       }

@@ -31,50 +31,65 @@ const Home = () => {
   return (
     <div className="home-page">
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {searchResults.length > 0 && (
+      {debouncedValue.trim() && searchResults.length > 0 && (
         <div className="search-results-container">
           {searchResults.slice(0, 10).map((result) => (
-            <span key={result.id} className="search-result-item">
+            <Link
+              key={result.id}
+              to={`/movie/${result.id}`}
+              className="search-result-item"
+            >
               {result.title}
-            </span>
+            </Link>
           ))}
         </div>
       )}
       <Hero
         image="/home-hero.png"
         title="Experience the Magic of Cinema"
-        subtitle="Discover the latest blockbusters and highly anticipated upcoming releases curated just for you."
+        subtitle="Discover blockbusters, hidden gems, and the most anticipated releases — curated for the true film lover."
+        badge="Now Streaming"
       />
 
       <div className="container py-4">
         <div className="movie-section mb-4">
-          <h2 className="section-title">Expected Next: Latest Movies</h2>
+          <div className="section-header">
+            <span className="section-eyebrow">In Theaters Now</span>
+            <h2 className="section-title">Latest Movies</h2>
+          </div>
           {latestError && <ErrorCard message={latestError} />}
           <div className="movies-grid">
-            {isLatestLoading && <p>Loading latest movies...</p>}
+            {isLatestLoading && (
+              <p className="loading-text">Loading latest movies</p>
+            )}
             {latestMovies.slice(0, 8).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
           <div className="load-more-container">
             <Link to="/latest" className="load-more-btn">
-              Explore more latest
+              Explore More
             </Link>
           </div>
         </div>
 
-        <div className="movie-section mt-4 pt-4">
-          <h2 className="section-title">Upcoming Movies</h2>
+        <div className="movie-section mt-4">
+          <div className="section-header">
+            <span className="section-eyebrow">Coming Soon</span>
+            <h2 className="section-title">Upcoming Movies</h2>
+          </div>
           {upcomingError && <ErrorCard message={upcomingError} />}
           <div className="movies-grid">
-            {isUpcomingLoading && <p>Loading upcoming movies...</p>}
+            {isUpcomingLoading && (
+              <p className="loading-text">Loading upcoming movies</p>
+            )}
             {upcomingMovies.slice(0, 8).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
           <div className="load-more-container">
             <Link to="/upcoming" className="load-more-btn">
-              Explore more upcoming
+              See What's Next
             </Link>
           </div>
         </div>
