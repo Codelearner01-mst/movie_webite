@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFetch from "../service/movies_service";
 import Hero from "../components/Hero";
 import MovieCard from "../components/MovieCard";
@@ -17,6 +17,11 @@ const Home = () => {
   const SEARCHAPIURL = `https://api.themoviedb.org/3/search/movie?query=${debouncedValue}&include_adult=true&language=en-US&page=1`;
 
   const { movies: searchResults } = useFetch(SEARCHAPIURL);
+
+  useEffect(() => {
+    sessionStorage.setItem("searchresults", JSON.stringify(searchResults));
+  }, [searchResults]);
+
   const {
     movies: latestMovies,
     isLoading: isLatestLoading,
@@ -33,7 +38,7 @@ const Home = () => {
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {debouncedValue.trim() && searchResults.length > 0 && (
         <div className="search-results-container">
-          {searchResults.slice(0, 10).map((result) => (
+          {searchResults.map((result) => (
             <Link
               key={result.id}
               to={`/movie/${result.id}`}

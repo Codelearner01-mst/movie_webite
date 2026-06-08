@@ -7,8 +7,6 @@ function MovieCard2({ movie }) {
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : movie.image;
 
-  console.log(movie);
-
   // TMDB Overview fallback, and shortening long overviews
   const overviewText = movie.overview
     ? movie.overview.length > 200

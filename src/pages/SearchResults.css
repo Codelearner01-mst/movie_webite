@@ -1,0 +1,66 @@
+.search-results-page {
+  padding: 1.75rem 0 3.5rem;
+  min-height: calc(100vh - var(--nav-height) - 6rem);
+}
+
+.search-results-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.search-results-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 1.5rem 1.25rem 1.5rem 0;
+  border-bottom: 1px solid rgba(212, 168, 83, 0.12);
+}
+
+.search-results-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1;
+  color: var(--text-main);
+}
+
+.search-results-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.movies-grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .movies-grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty-state {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .search-results-inner {
+    padding: 0 16px;
+  }
+
+  .search-results-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

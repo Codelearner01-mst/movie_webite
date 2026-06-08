@@ -1,4 +1,5 @@
 import "./Search.css";
+import { Link } from "react-router-dom";
 
 const Search = ({ searchTerm, setSearchTerm }) => {
   return (
@@ -29,6 +30,9 @@ const Search = ({ searchTerm, setSearchTerm }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             aria-label="Search movies"
           />
+          <Link to="/searchresults" className="search-button">
+            Search
+          </Link>
         </div>
       </div>
     </div>
