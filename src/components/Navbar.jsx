@@ -16,8 +16,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "Popular", path: "/popular" },
     { name: "Upcoming", path: "/upcoming" },
     { name: "Latest", path: "/latest" },
+    { name: "Top Rated", path: "/top-rated" },
     { name: "My Favourite", path: "/favourite" },
   ];
 

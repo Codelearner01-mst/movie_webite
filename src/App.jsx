@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Upcoming from "./pages/Upcoming";
 import Latest from "./pages/Latest";
+import Popular from "./pages/popular";
+import TopRated from "./pages/topRated";
 import Favourite from "./pages/Favourite";
 import MovieDetails from "./pages/MovieDetails";
 import "./App.css";
@@ -16,6 +18,8 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/popular" element={<Popular />} />
+            <Route path="/top-rated" element={<TopRated />} />
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/latest" element={<Latest />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
