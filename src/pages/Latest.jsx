@@ -37,8 +37,8 @@ const Latest = () => {
           <span className="section-eyebrow">Box Office</span>
           <h2 className="section-title">Now Showing</h2>
           <p className="section-description">
-            From critically acclaimed indie films to explosive blockbusters — find
-            your next favorite movie here.
+            From critically acclaimed indie films to explosive blockbusters —
+            find your next favorite movie here.
           </p>
         </div>
         {latestError && <ErrorCard message={latestError} />}
@@ -51,7 +51,11 @@ const Latest = () => {
           ))}
         </div>
         <div className="load-more-container">
-          <button className="load-more-btn" type="button" onClick={loadMoreMovies}>
+          <button
+            className="load-more-btn"
+            type="button"
+            onClick={loadMoreMovies}
+          >
             Load More
           </button>
         </div>
