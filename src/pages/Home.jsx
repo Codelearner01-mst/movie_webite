@@ -14,9 +14,12 @@ const UPCOMINGTAPIURL = `https://api.themoviedb.org/3/movie/upcoming?language=en
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedValue = useDebounce(searchTerm, 1000);
-  const SEARCHAPIURL = `https://api.themoviedb.org/3/search/movie?query=${debouncedValue}&include_adult=true&language=en-US&page=1`;
+  const SEARCHAPIURL = `https://api.themoviedb.org/3/search/multi?query=${debouncedValue}&include_adult=true&language=en-US&page=1`;
 
   const { movies: searchResults } = useFetch(SEARCHAPIURL);
+
+  const firstMovieMatch = searchResults.find((r) => r.media_type === "movie");
+  const firstTvMatch = searchResults.find((r) => r.media_type === "tv");
 
   useEffect(() => {
     sessionStorage.setItem("searchresults", JSON.stringify(searchResults));
@@ -38,15 +41,35 @@ const Home = () => {
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {debouncedValue.trim() && searchResults.length > 0 && (
         <div className="search-results-container">
-          {searchResults.map((result) => (
+          {firstMovieMatch && (
             <Link
-              key={result.id}
-              to={`/movie/${result.id}`}
+              to={`/movie/${firstMovieMatch.id}`}
               className="search-result-item"
             >
-              {result.title}
+              {firstMovieMatch.title || firstMovieMatch.name} in Movies
             </Link>
-          ))}
+          )}
+          {firstTvMatch && (
+            <Link to={`/tv/${firstTvMatch.id}`} className="search-result-item">
+              {firstTvMatch.title || firstTvMatch.name} in TV Shows
+            </Link>
+          )}
+          {searchResults.slice(0, 10).map(
+            (result) =>
+              result.media_type !== "person" && (
+                <Link
+                  key={result.id}
+                  to={
+                    result.media_type === "movie"
+                      ? `/movie/${result.id}`
+                      : `/tv/${result.id}`
+                  }
+                  className="search-result-item"
+                >
+                  {result.title || result.name}
+                </Link>
+              ),
+          )}
         </div>
       )}
       <Hero
