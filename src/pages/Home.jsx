@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import MovieCard from "../components/MovieCard";
 import { ErrorCard } from "../components/ErrorCard";
 import Search from "../components/Search";
+import Search2 from "../components/Search2";
 import useDebounce from "../hooks/Debounce";
 import "./Home.css";
 import { Link } from "react-router-dom";
@@ -13,6 +14,25 @@ const UPCOMINGTAPIURL = `https://api.themoviedb.org/3/movie/upcoming?language=en
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(true);
+
+  // Show dropdown when searchTerm changes
+  useEffect(() => {
+    if (searchTerm) {
+      setIsDropdownVisible(true);
+    }
+  }, [searchTerm]);
+
+  // Hide dropdown on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsDropdownVisible(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const debouncedValue = useDebounce(searchTerm, 1000);
   const SEARCHAPIURL = `https://api.themoviedb.org/3/search/multi?query=${debouncedValue}&include_adult=true&language=en-US&page=1`;
 
@@ -20,10 +40,6 @@ const Home = () => {
 
   const firstMovieMatch = searchResults.find((r) => r.media_type === "movie");
   const firstTvMatch = searchResults.find((r) => r.media_type === "tv");
-
-  useEffect(() => {
-    sessionStorage.setItem("searchresults", JSON.stringify(searchResults));
-  }, [searchResults]);
 
   const {
     movies: latestMovies,
@@ -38,40 +54,53 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {debouncedValue.trim() && searchResults.length > 0 && (
-        <div className="search-results-container">
-          {firstMovieMatch && (
-            <Link
-              to={`/movie/${firstMovieMatch.id}`}
-              className="search-result-item"
-            >
-              {firstMovieMatch.title || firstMovieMatch.name} in Movies
-            </Link>
-          )}
-          {firstTvMatch && (
-            <Link to={`/tv/${firstTvMatch.id}`} className="search-result-item">
-              {firstTvMatch.title || firstTvMatch.name} in TV Shows
-            </Link>
-          )}
-          {searchResults.slice(0, 10).map(
-            (result) =>
-              result.media_type !== "person" && (
+      {/* Full-width sticky search at top */}
+      <div className="sticky-search-wrapper">
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        {/* Search results dropdown for full-width search */}
+        {debouncedValue.trim() &&
+          searchResults.length > 0 &&
+          isDropdownVisible && (
+            <div className="search-results-container search-results-full">
+              {firstMovieMatch && (
                 <Link
-                  key={result.id}
-                  to={
-                    result.media_type === "movie"
-                      ? `/movie/${result.id}`
-                      : `/tv/${result.id}`
-                  }
+                  to={`/movie/${firstMovieMatch.id}`}
                   className="search-result-item"
+                  onClick={() => setSearchTerm("")}
                 >
-                  {result.title || result.name}
+                  {firstMovieMatch.title || firstMovieMatch.name} in Movies
                 </Link>
-              ),
+              )}
+              {firstTvMatch && (
+                <Link
+                  to={`/tv/${firstTvMatch.id}`}
+                  className="search-result-item"
+                  onClick={() => setSearchTerm("")}
+                >
+                  {firstTvMatch.title || firstTvMatch.name} in TV Shows
+                </Link>
+              )}
+              {searchResults.slice(0, 7).map(
+                (result) =>
+                  result.media_type !== "person" && (
+                    <Link
+                      key={result.id}
+                      to={
+                        result.media_type === "movie"
+                          ? `/movie/${result.id}`
+                          : `/tv/${result.id}`
+                      }
+                      className="search-result-item"
+                      onClick={() => setSearchTerm("")}
+                    >
+                      {result.title || result.name}
+                    </Link>
+                  ),
+              )}
+            </div>
           )}
-        </div>
-      )}
+      </div>
+      {/* Hero section */}
       <Hero
         image="/home-hero.png"
         title="Experience the Magic of Cinema"
@@ -79,6 +108,8 @@ const Home = () => {
         badge="Now Streaming"
       />
 
+      {/* Original search UI after hero */}
+      <Search2 />
       <div className="container py-4">
         <div className="movie-section mb-4">
           <div className="section-header">

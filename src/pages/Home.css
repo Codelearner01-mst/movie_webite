@@ -89,3 +89,37 @@
 .search-result-item:hover::before {
   opacity: 1;
 }
+
+/* Sticky search wrapper in Home.jsx */
+.sticky-search-wrapper {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 150;
+  background: linear-gradient(to bottom, var(--bg-deep), var(--bg-void));
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.25rem 0;
+}
+
+/* Disable stickiness and redundant styling on the inner search component container */
+.sticky-search-wrapper .search-container-sticky {
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+  padding: 0;
+}
+
+/* Search results dropdown for the sticky search bar, positioned at the left and attached */
+.sticky-search-wrapper .search-results-full {
+  position: absolute;
+  top: 100%; /* attached directly below the search wrapper */
+  left: 1rem; /* aligned to the left of the input */
+  transform: none; /* overrides the default translate-X(-50%) */
+  width: min(480px, calc(100% - 2rem)); /* matches width nicely and keeps it responsive */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  z-index: 160;
+}
