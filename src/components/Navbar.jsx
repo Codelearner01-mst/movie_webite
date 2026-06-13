@@ -6,8 +6,6 @@ const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  console.log("Is Dropdown Open:", isDropdownOpen);
-  console.log("Location:", location.pathname);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

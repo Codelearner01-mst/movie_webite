@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const Search2 = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  /* useEffect(() => {
     // Store search term in session storage for retrieval on search results page
     sessionStorage.setItem("searchTerm", searchTerm);
-  }, [searchTerm]);
+  }, [searchTerm]);*/
 
   return (
     <div className="search-container">
@@ -38,7 +38,7 @@ const Search2 = () => {
             aria-label="Search movies"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Link to="/searchresults" className="search-button">
+          <Link to={`/search/${searchTerm}`} className="search-button">
             Search
           </Link>
         </div>

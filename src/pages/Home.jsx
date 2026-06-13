@@ -64,7 +64,7 @@ const Home = () => {
             <div className="search-results-container search-results-full">
               {firstMovieMatch && (
                 <Link
-                  to={`/movie/${firstMovieMatch.id}`}
+                  to={`search/${firstMovieMatch.title || firstMovieMatch.name}`}
                   className="search-result-item"
                   onClick={() => setSearchTerm("")}
                 >
@@ -73,7 +73,7 @@ const Home = () => {
               )}
               {firstTvMatch && (
                 <Link
-                  to={`/tv/${firstTvMatch.id}`}
+                  to={`search/${firstTvMatch.title || firstTvMatch.name}`}
                   className="search-result-item"
                   onClick={() => setSearchTerm("")}
                 >
@@ -85,11 +85,7 @@ const Home = () => {
                   result.media_type !== "person" && (
                     <Link
                       key={result.id}
-                      to={
-                        result.media_type === "movie"
-                          ? `/movie/${result.id}`
-                          : `/tv/${result.id}`
-                      }
+                      to={`search/${result.title || result.name}`}
                       className="search-result-item"
                       onClick={() => setSearchTerm("")}
                     >

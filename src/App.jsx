@@ -24,7 +24,7 @@ function App() {
             <Route path="/latest" element={<Latest />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
             <Route path="/favourite" element={<Favourite />} />
-            <Route path="/searchresults" element={<SearchResults />} />
+            <Route path="/search/:query" element={<SearchResults />} />
           </Routes>
         </main>
         <footer className="site-footer">

@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Search from "../components/Search";
 import MovieCard2 from "../components/movieCard2";
 import "./SearchResults.css";
 import useFetch from "../service/movies_service";
+import useDebounce from "../hooks/Debounce";
 
 const SearchResults = () => {
-  const searchTermFromStorage = sessionStorage.getItem("searchTerm") || "";
-  const [searchTerm, setSearchTerm] = useState(searchTermFromStorage);
+  const { query } = useParams();
+  const [searchTerm, setSearchTerm] = useState(query || "");
+  const debouncedValue = useDebounce(searchTerm, 1000);
 
-  const SEARCHAPIURL = `https://api.themoviedb.org/3/search/multi?query=${searchTerm}&include_adult=true&language=en-US&page=1`;
+  const SEARCHAPIURL = `https://api.themoviedb.org/3/search/multi?query=${debouncedValue}&include_adult=true&language=en-US&page=1`;
   const { movies: searchResults } = useFetch(SEARCHAPIURL);
+  console.log("Search Results:", searchResults);
 
   return (
     <div className="search-results-page">
