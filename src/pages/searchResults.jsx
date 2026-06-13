@@ -2,12 +2,14 @@ import { useState } from "react";
 import Search from "../components/Search";
 import MovieCard2 from "../components/movieCard2";
 import "./SearchResults.css";
+import useFetch from "../service/movies_service";
 
 const SearchResults = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const searchResults = JSON.parse(
-    sessionStorage.getItem("searchresults") || "[]",
-  );
+  const searchTermFromStorage = sessionStorage.getItem("searchTerm") || "";
+  const [searchTerm, setSearchTerm] = useState(searchTermFromStorage);
+
+  const SEARCHAPIURL = `https://api.themoviedb.org/3/search/multi?query=${searchTerm}&include_adult=true&language=en-US&page=1`;
+  const { movies: searchResults } = useFetch(SEARCHAPIURL);
 
   return (
     <div className="search-results-page">

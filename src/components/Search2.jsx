@@ -1,19 +1,14 @@
-import { useRef } from "react";
+import { useState, useEffect } from "react";
 import "./Search.css";
 import { Link } from "react-router-dom";
 
-const Search2 = ({ searchTerm2 }) => {
-  const inputRef = useRef(null);
+const Search2 = () => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputRef.current) {
-      const query = inputRef.current.value.trim();
-      if (query) {
-        searchTerm2 = query; // Update the searchTerm2 state
-      }
-    }
-  };
+  useEffect(() => {
+    // Store search term in session storage for retrieval on search results page
+    sessionStorage.setItem("searchTerm", searchTerm);
+  }, [searchTerm]);
 
   return (
     <div className="search-container">
@@ -36,18 +31,14 @@ const Search2 = ({ searchTerm2 }) => {
             <path d="m21 21-4.3-4.3" />
           </svg>
           <input
-            ref={inputRef}
             type="text"
             className="search-input"
             placeholder="Search movies, genres, actors..."
-            value={searchTerm2}
+            value={searchTerm}
             aria-label="Search movies"
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Link
-            to="/searchresults"
-            className="search-button"
-            onClick={handleSubmit}
-          >
+          <Link to="/searchresults" className="search-button">
             Search
           </Link>
         </div>
