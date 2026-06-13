@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import Search from "../components/Search";
 import MovieCard2 from "../components/movieCard2";
 import "./SearchResults.css";
@@ -15,10 +15,80 @@ const SearchResults = () => {
   const { movies: searchResults } = useFetch(SEARCHAPIURL);
   console.log("Search Results:", searchResults);
 
+  const firstMovieMatch = searchResults.find((r) => r.media_type === "movie");
+  const firstTvMatch = searchResults.find((r) => r.media_type === "tv");
+
+  const [isDropdownVisible, setIsDropdownVisible] = useState(true);
+
+  // Show dropdown when searchTerm changes
+  useEffect(() => {
+    if (searchTerm) {
+      setIsDropdownVisible(true);
+    }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setSearchTerm(query || "");
+    setIsDropdownVisible(false);
+  }, [query]);
+  useEffect(() => {
+    setIsDropdownVisible(false);
+  }, []);
+
+  // Hide dropdown on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsDropdownVisible(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="search-results-page">
       <div className="search-results-inner">
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        {/* Search bar with dropdown */}
+        <div className="sr-search-wrapper">
+          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+          {/* Dropdown — same design as Home.jsx */}
+          {debouncedValue.trim() &&
+            searchResults.length > 0 &&
+            isDropdownVisible && (
+              <div className="search-results-container sr-dropdown">
+                {firstMovieMatch && (
+                  <Link
+                    to={`/search/${firstMovieMatch.title || firstMovieMatch.name}`}
+                    className="search-result-item"
+                  >
+                    {firstMovieMatch.title || firstMovieMatch.name} in Movies
+                  </Link>
+                )}
+                {firstTvMatch && (
+                  <Link
+                    to={`/search/${firstTvMatch.title || firstTvMatch.name}`}
+                    className="search-result-item"
+                  >
+                    {firstTvMatch.title || firstTvMatch.name} in TV Shows
+                  </Link>
+                )}
+                {searchResults.slice(0, 7).map(
+                  (result) =>
+                    result.media_type !== "person" && (
+                      <Link
+                        key={result.id}
+                        to={`/search/${result.title || result.name}`}
+                        className="search-result-item"
+                      >
+                        {result.title || result.name}
+                      </Link>
+                    ),
+                )}
+              </div>
+            )}
+        </div>
 
         <section className="search-results-header">
           <p className="section-eyebrow">Search</p>

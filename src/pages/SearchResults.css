@@ -3,6 +3,22 @@
   min-height: calc(100vh - var(--nav-height) - 6rem);
 }
 
+/* Wrapper that holds the Search input + dropdown together */
+.sr-search-wrapper {
+  position: relative;
+}
+
+/* Position the dropdown directly below the search bar */
+.sr-search-wrapper .sr-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  transform: none;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
 .search-results-inner {
   max-width: 1280px;
   margin: 0 auto;
