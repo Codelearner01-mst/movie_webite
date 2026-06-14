@@ -40,13 +40,12 @@ const MovieCard = ({ movie }) => {
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : movie.image;
 
-  const year = movie.release_date
-    ? new Date(movie.release_date).getFullYear()
-    : null;
+  const year =
+    movie.release_date || movie.first_air_date
+      ? new Date(movie.release_date || movie.first_air_date).getFullYear()
+      : null;
 
-  const rating = movie.vote_average
-    ? movie.vote_average.toFixed(1)
-    : null;
+  const rating = movie.vote_average ? movie.vote_average.toFixed(1) : null;
 
   return (
     <div
@@ -68,7 +67,11 @@ const MovieCard = ({ movie }) => {
           </button>
           {isMenuOpen && (
             <div className="movie-card-dropdown">
-              <button type="button" className="dropdown-item" onClick={ToggleFavourite}>
+              <button
+                type="button"
+                className="dropdown-item"
+                onClick={ToggleFavourite}
+              >
                 {isFavourite ? "Remove from Favourite" : "Add to Favourite"}
               </button>
               <button type="button" className="dropdown-item">
@@ -100,7 +103,7 @@ const MovieCard = ({ movie }) => {
       </div>
       <div className="movie-card-content">
         {year && <span className="movie-card-year">{year}</span>}
-        <h3 className="movie-card-title">{movie.title}</h3>
+        <h3 className="movie-card-title">{movie.title || movie.name}</h3>
       </div>
     </div>
   );

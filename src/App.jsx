@@ -5,6 +5,8 @@ import Upcoming from "./pages/Upcoming";
 import Latest from "./pages/Latest";
 import Popular from "./pages/Popular";
 import TopRated from "./pages/TopRated";
+import PopularTvShows from "./pages/PopularTvShows";
+import TopRatedTvShows from "./pages/TopRatedTvShows";
 import Favourite from "./pages/Favourite";
 import MovieDetails from "./pages/MovieDetails";
 import "./App.css";
@@ -22,6 +24,8 @@ function App() {
             <Route path="/top-rated" element={<TopRated />} />
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/latest" element={<Latest />} />
+            <Route path="/tv-popular" element={<PopularTvShows />} />
+            <Route path="/tv-top-rated" element={<TopRatedTvShows />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
             <Route path="/favourite" element={<Favourite />} />
             <Route path="/search/:query" element={<SearchResults />} />

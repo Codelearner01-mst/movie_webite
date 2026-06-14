@@ -28,6 +28,14 @@ const Navbar = () => {
         { name: "Top Rated", path: "/top-rated" },
       ],
     },
+    {
+      name: "TV Shows",
+      path: "#",
+      dropdown: [
+        { name: "Popular", path: "/tv-popular" },
+        { name: "Top Rated", path: "/tv-top-rated" },
+      ],
+    },
     { name: "My Favourite", path: "/favourite" },
   ];
 
