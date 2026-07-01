@@ -40,10 +40,9 @@ const MovieCard = ({ movie }) => {
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : movie.image;
 
-  const year =
-    movie.release_date || movie.first_air_date
-      ? new Date(movie.release_date || movie.first_air_date).getFullYear()
-      : null;
+  const year = movie.release_date
+    ? new Date(movie.release_date).getFullYear()
+    : null;
 
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : null;
 
