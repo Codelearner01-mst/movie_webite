@@ -88,7 +88,7 @@ const Navbar = () => {
                     <span className="dropdown-arrow">▼</span>
                   </Link>
                   <ul
-                    className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}
+                    className={`dropdown-menu ${isDropdownOpen ? `${link.name.toLowerCase().replace(" ", "-")}-show` : ""}`}
                   >
                     {link.dropdown.map((item) => (
                       <li key={item.name}>

@@ -117,7 +117,8 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.has-dropdown:hover .dropdown-menu.show {
+.has-dropdown:hover .movies-show,
+.has-dropdown:hover .tv-shows-show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -213,7 +214,8 @@
     min-width: auto;
   }
 
-  .dropdown-menu.show {
+  .dropdown-menu.movies-show,
+  .dropdown-menu.tv-shows-show {
     max-height: 300px;
     padding: 0.5rem 0;
   }
@@ -225,11 +227,6 @@
 
   .dropdown-arrow {
     transition: transform 0.3s ease;
-  }
-
-  .dropdown-menu.show ~ .dropdown-arrow,
-  .has-dropdown:hover .dropdown-arrow {
-    transform: rotate(180deg);
   }
 
   .bar.open:nth-child(1) {

@@ -44,7 +44,9 @@ const MovieCard = ({ movie }) => {
     ? new Date(movie.release_date).getFullYear()
     : null;
 
-  const rating = movie.vote_average ? movie.vote_average.toFixed(1) : null;
+  const rating = movie.vote_average
+    ? movie.vote_average.toFixed(1)
+    : null;
 
   return (
     <div
@@ -66,11 +68,7 @@ const MovieCard = ({ movie }) => {
           </button>
           {isMenuOpen && (
             <div className="movie-card-dropdown">
-              <button
-                type="button"
-                className="dropdown-item"
-                onClick={ToggleFavourite}
-              >
+              <button type="button" className="dropdown-item" onClick={ToggleFavourite}>
                 {isFavourite ? "Remove from Favourite" : "Add to Favourite"}
               </button>
               <button type="button" className="dropdown-item">
