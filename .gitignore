@@ -25,3 +25,4 @@ dist-ssr
 .env
 
 src/testing/search-results.test.js
+AGENTS.md

@@ -24,7 +24,12 @@
     #07070d 100%
   );
   --gradient-gold: linear-gradient(90deg, #b8860b, #f0c96e, #b8860b);
-  --gradient-title: linear-gradient(135deg, #ffffff 0%, #f0c96e 50%, #ff6b6b 100%);
+  --gradient-title: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f0c96e 50%,
+    #ff6b6b 100%
+  );
 
   --border-subtle: rgba(212, 168, 83, 0.15);
   --border-glow: rgba(229, 9, 20, 0.4);

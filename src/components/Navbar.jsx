@@ -5,7 +5,7 @@ import "./Navbar.css";
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
-    setIsDropdownOpen(false);
+    setActiveDropdown("");
   };
 
   const navLinks = [
@@ -69,8 +69,8 @@ const Navbar = () => {
             <li
               key={link.name}
               className={`nav-item ${link.dropdown ? "has-dropdown" : ""}`}
-              onMouseEnter={() => link.dropdown && setIsDropdownOpen(true)}
-              onMouseLeave={() => link.dropdown && setIsDropdownOpen(false)}
+              onMouseEnter={() => link.dropdown && setActiveDropdown(link.name)}
+              onMouseLeave={() => link.dropdown && setActiveDropdown("")}
             >
               {link.dropdown ? (
                 <>
@@ -80,7 +80,9 @@ const Navbar = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       if (window.innerWidth <= 768) {
-                        setIsDropdownOpen(!isDropdownOpen);
+                        setActiveDropdown(
+                          activeDropdown === link.name ? "" : link.name,
+                        );
                       }
                     }}
                   >
@@ -88,7 +90,7 @@ const Navbar = () => {
                     <span className="dropdown-arrow">▼</span>
                   </Link>
                   <ul
-                    className={`dropdown-menu ${isDropdownOpen ? `${link.name.toLowerCase().replace(" ", "-")}-show` : ""}`}
+                    className={`dropdown-menu ${activeDropdown === link.name ? "show" : ""}`}
                   >
                     {link.dropdown.map((item) => (
                       <li key={item.name}>

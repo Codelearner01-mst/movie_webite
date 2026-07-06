@@ -117,8 +117,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.has-dropdown:hover .movies-show,
-.has-dropdown:hover .tv-shows-show {
+.has-dropdown:hover .dropdown-menu.show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -214,8 +213,7 @@
     min-width: auto;
   }
 
-  .dropdown-menu.movies-show,
-  .dropdown-menu.tv-shows-show {
+  .dropdown-menu.show {
     max-height: 300px;
     padding: 0.5rem 0;
   }
