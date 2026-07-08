@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Hero from "../components/Hero";
 import { getFromLocalStorage } from "../Utils/storage";
 import MovieCard2 from "../components/movieCard2";
 
@@ -9,12 +8,6 @@ const Favourite = () => {
 
   return (
     <div className="favourite-page">
-      <Hero
-        image="/secondary-hero.png"
-        title="Your Favourites"
-        subtitle="Keep track of the movies you love and the ones you want to watch next."
-        badge="Personal Collection"
-      />
       <div className="container py-4">
         <div className="section-header centered">
           <span className="section-eyebrow">Watchlist</span>

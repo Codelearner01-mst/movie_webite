@@ -98,7 +98,7 @@ const Home = () => {
       </div>
       {/* Hero section */}
       <Hero
-        image="/home-hero.png"
+        image="https://static0.colliderimages.com/wordpress/wp-content/uploads/2024/12/10-best-action-movies-of-the-last-25-years.jpg"
         title="Experience the Magic of Cinema"
         subtitle="Discover blockbusters, hidden gems, and the most anticipated releases — curated for the true film lover."
         badge="Now Streaming"

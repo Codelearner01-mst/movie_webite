@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './Hero.css';
+import { useState } from "react";
+import "./Hero.css";
 
 const Hero = ({ image, title, subtitle, badge }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -11,7 +11,9 @@ const Hero = ({ image, title, subtitle, badge }) => {
     <section className="hero">
       <div className="hero-bg-layer hero-bg-gradient" />
       {showImage && (
-        <div className={`hero-bg-layer hero-bg-image ${imageLoaded ? 'loaded' : ''}`}>
+        <div
+          className={`hero-bg-layer hero-bg-image ${imageLoaded ? "loaded" : ""}`}
+        >
           <img
             src={image}
             alt=""
@@ -22,10 +24,6 @@ const Hero = ({ image, title, subtitle, badge }) => {
       )}
       <div className="hero-vignette" />
       <div className="hero-scanlines" />
-      <div className="hero-film-bars">
-        <div className="film-bar top" />
-        <div className="film-bar bottom" />
-      </div>
 
       <div className="container hero-content">
         {badge && <span className="hero-badge">{badge}</span>}

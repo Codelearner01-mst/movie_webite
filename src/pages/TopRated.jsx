@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ErrorCard } from "../components/ErrorCard";
-import Hero from "../components/Hero";
 import useFetch from "../service/movies_service";
 import MovieCard from "../components/MovieCard";
 
@@ -26,12 +25,6 @@ const TopRated = () => {
 
   return (
     <div className="toprated-page">
-      <Hero
-        image="/home-hero.png"
-        title="Top Rated Movies"
-        subtitle="Experience the highest-rated films of all time. Critically acclaimed masterpieces that have stood the test of time."
-        badge="Critics' Choice"
-      />
       <div className="container py-4">
         <div className="section-header centered">
           <span className="section-eyebrow">Highest Rated</span>

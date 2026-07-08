@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ErrorCard } from "../components/ErrorCard";
-import Hero from "../components/Hero";
 import useFetch from "../service/movies_service";
 import MovieCard from "../components/MovieCard";
 
@@ -26,12 +25,6 @@ const Popular = () => {
 
   return (
     <div className="popular-page">
-      <Hero
-        image="/home-hero.png"
-        title="Popular Movies"
-        subtitle="Discover what the world is watching right now. The most popular films trending across the globe."
-        badge="Trending Now"
-      />
       <div className="container py-4">
         <div className="section-header centered">
           <span className="section-eyebrow">Audience Favorites</span>

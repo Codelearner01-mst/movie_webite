@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ErrorCard } from "../components/ErrorCard";
-import Hero from "../components/Hero";
 import useFetch from "../service/movies_service";
 import MovieCard from "../components/MovieCard";
 
@@ -26,12 +25,6 @@ const Latest = () => {
 
   return (
     <div className="latest-page">
-      <Hero
-        image="/secondary-hero.png"
-        title="Latest Releases"
-        subtitle="Stay up to date with the newest additions to the big screen. Don't miss the films everyone is talking about."
-        badge="Now Showing"
-      />
       <div className="container py-4">
         <div className="section-header centered">
           <span className="section-eyebrow">Box Office</span>

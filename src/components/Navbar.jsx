@@ -39,12 +39,14 @@ const Navbar = () => {
     { name: "My Favourite", path: "/favourite" },
   ];
 
-  const isDropdownActive = () => {
-    const dropdownPaths =
-      navLinks
-        .find((link) => link.name === "Movies")
-        ?.dropdown?.map((d) => d.path) || [];
-    return dropdownPaths.includes(location.pathname);
+  const isDropdownActive = (name) => {
+    const dropdown = navLinks.find(
+      (link) =>
+        link.dropdown?.length > 0 &&
+        link.dropdown.some((item) => item.path === location.pathname),
+    );
+    if (!dropdown) return false;
+    return dropdown.name === name;
   };
 
   return (
@@ -76,7 +78,7 @@ const Navbar = () => {
                 <>
                   <Link
                     to={link.path}
-                    className={`nav-link ${isDropdownActive() ? "active" : ""}`}
+                    className={`nav-link ${isDropdownActive(link.name) ? "active" : ""}`}
                     onClick={(e) => {
                       e.preventDefault();
                       if (window.innerWidth <= 768) {

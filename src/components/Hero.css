@@ -109,45 +109,6 @@
   );
 }
 
-.hero-film-bars {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.film-bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 28px;
-  background: var(--bg-void);
-  opacity: 0.9;
-}
-
-.film-bar.top {
-  top: 0;
-  border-bottom: 2px solid rgba(212, 168, 83, 0.3);
-}
-
-.film-bar.bottom {
-  bottom: 0;
-  border-top: 2px solid rgba(212, 168, 83, 0.3);
-}
-
-.film-bar::before {
-  content: "";
-  position: absolute;
-  inset: 4px 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 18px,
-    rgba(212, 168, 83, 0.15) 18px,
-    rgba(212, 168, 83, 0.15) 22px
-  );
-}
-
 .hero-content {
   position: relative;
   z-index: 10;
@@ -272,9 +233,5 @@
   .hero {
     height: 65vh;
     min-height: 400px;
-  }
-
-  .film-bar {
-    height: 18px;
   }
 }
