@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ErrorCard } from "../components/ErrorCard";
-import useFetch from "../service/movies_service";
-import MovieCard from "../components/MovieCard";
+import { useFetch } from "../service/movies_service";
+import Card from "../components/Card";
 
 const TopRatedTvShows = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,8 +39,8 @@ const TopRatedTvShows = () => {
           {isTopRatedLoading && loadAllTvShows.length === 0 && (
             <p className="loading-text">Loading top rated TV shows</p>
           )}
-          {loadAllTvShows.map((tvShow) => (
-            <MovieCard key={tvShow.id} movie={tvShow} />
+          {loadAllTvShows.map((tv) => (
+            <Card key={tv.id} show={tv} endpoint="/tv" />
           ))}
         </div>
         <div className="load-more-container">

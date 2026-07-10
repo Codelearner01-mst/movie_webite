@@ -9,6 +9,7 @@ import PopularTvShows from "./pages/PopularTvShows";
 import TopRatedTvShows from "./pages/TopRatedTvShows";
 import Favourite from "./pages/Favourite";
 import MovieDetails from "./pages/MovieDetails";
+import TVDetails from "./pages/TVDetails";
 import "./App.css";
 import SearchResults from "./pages/searchResults";
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/tv-popular" element={<PopularTvShows />} />
             <Route path="/tv-top-rated" element={<TopRatedTvShows />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/tv/:id" element={<TVDetails />} />
             <Route path="/favourite" element={<Favourite />} />
             <Route path="/search/:query" element={<SearchResults />} />
           </Routes>

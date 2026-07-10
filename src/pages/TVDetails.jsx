@@ -3,18 +3,12 @@ import { useParams } from "react-router-dom";
 import { useDetails } from "../service/movies_service";
 import "./MovieDetails.css";
 
-const MovieDetails = () => {
+const TVDetails = () => {
   const { id } = useParams();
-  const url = `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos&language=en-US`;
-  const url2 = `https://api.themoviedb.org/3/tv/${id}?append_to_response=videos&language=en-US`;
-  const ERROR = "Failed to fetch movie details. Please try again";
-  const { movie, isLoading, error } = useDetails(url, ERROR);
-  const {
-    movie: tv,
-    isLoading: isLoadingTV,
-    error: er,
-  } = useDetails(url2, ERROR);
-  console.log("Tv show details data", tv);
+  const url = `https://api.themoviedb.org/3/tv/${id}?append_to_response=videos&language=en-US`;
+  const ERROR = "Failed to fetch TV show details. Please try again";
+  const { movie: tv, isLoading, error } = useDetails(url, ERROR);
+
   if (isLoading) {
     return (
       <div className="movie-details-loading">
@@ -24,27 +18,27 @@ const MovieDetails = () => {
     );
   }
 
-  if (error || !movie) {
+  if (error || !tv) {
     return (
       <div className="movie-details-error">
         <h2>Oops!</h2>
-        <p>{error || "We couldn't find the details for this movie."}</p>
+        <p>{error || "We couldn't find the details for this TV show."}</p>
       </div>
     );
   }
 
   // Find the official YouTube trailer
-  const trailer = movie.videos?.results?.find(
+  const trailer = tv.videos?.results?.find(
     (vid) => vid.site === "YouTube" && vid.type === "Trailer",
   );
 
-  const backdropUrl = movie.backdrop_path
-    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+  const backdropUrl = tv.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${tv.backdrop_path}`
     : "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1920&q=80"; // generic cinema fallback
 
-  const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : movie.image;
+  const posterUrl = tv.poster_path
+    ? `https://image.tmdb.org/t/p/w500${tv.poster_path}`
+    : tv.image;
 
   return (
     <div className="movie-details-page">
@@ -60,16 +54,19 @@ const MovieDetails = () => {
         <div className="movie-details-grid">
           {/* Left Column: Poster & Info */}
           <div className="movie-details-left">
-            <img src={posterUrl} alt={movie.title} className="detail-poster" />
+            <img src={posterUrl} alt={tv.name} className="detail-poster" />
             <div className="detail-stats">
-              <span className="stat-badge">{movie.release_date}</span>
-              <span className="stat-badge">{movie.runtime} min</span>
+              <span className="stat-badge">{tv.first_air_date}</span>
+              <span className="stat-badge">{tv.number_of_seasons} Seasons</span>
+              <span className="stat-badge">
+                {tv.number_of_episodes} Episodes
+              </span>
               <span className="stat-badge rating">
-                ★ {movie.vote_average?.toFixed(1)}
+                ★ {tv.vote_average?.toFixed(1)}
               </span>
             </div>
             <div className="detail-genres">
-              {movie.genres?.map((g) => (
+              {tv.genres?.map((g) => (
                 <span key={g.id} className="genre-pill">
                   {g.name}
                 </span>
@@ -79,14 +76,22 @@ const MovieDetails = () => {
 
           {/* Right Column: Title, Overview, Trailer */}
           <div className="movie-details-right">
-            <span className="section-eyebrow">Movie Info</span>
-            <h1 className="detail-title">{movie.title}</h1>
-            {movie.tagline && (
-              <p className="detail-tagline">"{movie.tagline}"</p>
-            )}
+            <span className="section-eyebrow">TV Show Info</span>
+            <h1 className="detail-title">{tv.name}</h1>
+            {tv.tagline && <p className="detail-tagline">"{tv.tagline}"</p>}
 
             <h3 className="section-heading">Overview</h3>
-            <p className="detail-overview">{movie.overview}</p>
+            <p className="detail-overview">{tv.overview}</p>
+
+            <div
+              className="detail-stats"
+              style={{ justifyContent: "flex-start" }}
+            >
+              <span className="stat-badge">
+                First Aired: {tv.first_air_date}
+              </span>
+              <span className="stat-badge">Last Aired: {tv.last_air_date}</span>
+            </div>
 
             {trailer ? (
               <div className="trailer-section">
@@ -113,4 +118,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default TVDetails;

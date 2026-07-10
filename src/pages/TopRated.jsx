@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ErrorCard } from "../components/ErrorCard";
-import useFetch from "../service/movies_service";
-import MovieCard from "../components/MovieCard";
+import { useFetch } from "../service/movies_service";
+import Card from "../components/Card";
 
 const TopRated = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,7 +40,7 @@ const TopRated = () => {
             <p className="loading-text">Loading top rated movies</p>
           )}
           {loadAllMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <Card key={movie.id} show={movie} endpoint="/movie" />
           ))}
         </div>
         <div className="load-more-container">

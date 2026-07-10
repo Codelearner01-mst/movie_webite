@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Search from "../components/Search";
-import MovieCard2 from "../components/movieCard2";
+import Card2 from "../components/Card2";
 import "./SearchResults.css";
-import useFetch from "../service/movies_service";
+import { useFetch } from "../service/movies_service";
 import useDebounce from "../hooks/Debounce";
 
 const SearchResults = () => {
@@ -98,8 +98,8 @@ const SearchResults = () => {
 
         {searchResults.length > 0 ? (
           <div className="movies-grid2">
-            {searchResults.map((movie) => (
-              <MovieCard2 key={movie.id} movie={movie} />
+            {searchResults.map((result) => (
+              <Card2 key={result.id} show={result} />
             ))}
           </div>
         ) : (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getFromLocalStorage } from "../Utils/storage";
-import MovieCard2 from "../components/movieCard2";
+import Card2 from "../components/Card2";
 
 const Favourite = () => {
   const favourite = getFromLocalStorage("favourite");
@@ -23,8 +23,8 @@ const Favourite = () => {
           </div>
         )}
         <div className="movies-grid2">
-          {favouriteMovies.map((movie) => (
-            <MovieCard2 key={movie.id} movie={movie} />
+          {favouriteMovies.map((favourite) => (
+            <Card2 key={favourite.id} show={favourite} />
           ))}
         </div>
       </div>

@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./MovieCard.css";
+import "./Card.css";
 import { saveToLocalStorage, getFromLocalStorage } from "../Utils/storage";
 import { isMovieInFavourites } from "../Utils/helper";
 
-const MovieCard = ({ movie }) => {
+const Card = ({ show, endpoint }) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isFavourite, setIsFavourite] = useState(isMovieInFavourites(movie));
+  const [isFavourite, setIsFavourite] = useState(isMovieInFavourites(show));
 
   const ToggleFavourite = (e) => {
     e.stopPropagation();
     const currentFavourites = getFromLocalStorage("favourite") || [];
     if (!isFavourite) {
-      saveToLocalStorage("favourite", [...currentFavourites, movie]);
+      saveToLocalStorage("favourite", [...currentFavourites, show]);
       setIsFavourite(true);
     } else {
       const newFavourites = currentFavourites.filter(
-        (fav) => fav.id !== movie.id,
+        (fav) => fav.id !== show.id,
       );
       saveToLocalStorage("favourite", newFavourites);
       setIsFavourite(false);
@@ -33,20 +33,14 @@ const MovieCard = ({ movie }) => {
 
   const goToDetails = (e) => {
     e?.stopPropagation();
-    navigate(`/movie/${movie.id}`);
+    navigate(`${endpoint}/${show.id}`);
   };
 
-  const imageUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : movie.image;
+  const imageUrl = show.poster_path
+    ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
+    : show.image;
 
-  const year = movie.release_date
-    ? new Date(movie.release_date).getFullYear()
-    : null;
-
-  const rating = movie.vote_average
-    ? movie.vote_average.toFixed(1)
-    : null;
+  const rating = show.vote_average ? show.vote_average.toFixed(1) : null;
 
   return (
     <div
@@ -68,7 +62,11 @@ const MovieCard = ({ movie }) => {
           </button>
           {isMenuOpen && (
             <div className="movie-card-dropdown">
-              <button type="button" className="dropdown-item" onClick={ToggleFavourite}>
+              <button
+                type="button"
+                className="dropdown-item"
+                onClick={ToggleFavourite}
+              >
                 {isFavourite ? "Remove from Favourite" : "Add to Favourite"}
               </button>
               <button type="button" className="dropdown-item">
@@ -79,7 +77,7 @@ const MovieCard = ({ movie }) => {
         </div>
         <img
           src={imageUrl}
-          alt={movie.title}
+          alt={show.title}
           className="movie-card-image"
           loading="lazy"
         />
@@ -91,19 +89,16 @@ const MovieCard = ({ movie }) => {
             {rating}
           </span>
         )}
-        <div className="movie-card-overlay">
-          <button type="button" className="watch-btn" onClick={goToDetails}>
-            View Details
-          </button>
-        </div>
         <div className="movie-card-shine" />
       </div>
       <div className="movie-card-content">
-        {year && <span className="movie-card-year">{year}</span>}
-        <h3 className="movie-card-title">{movie.title || movie.name}</h3>
+        <span className="movie-card-year">
+          {show.release_date || show.first_air_date}
+        </span>
+        <h3 className="movie-card-title">{show.title || show.name}</h3>
       </div>
     </div>
   );
 };
 
-export default MovieCard;
+export default Card;
